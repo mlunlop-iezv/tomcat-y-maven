@@ -31,3 +31,7 @@ cp /vagrant/config/mluna.test.rev /var/lib/bind/
 # Instalación de tomcat y maven
 echo "Instalando tomcat y maven ------------------------------------------------ "
 apt-get install -y default-jdk tomcat9 tomcat9-admin maven
+
+#Copiando la web estatica
+echo "Copiando la web estatica ------------------------------------------------ "
+sudo cp -r /vagrant/config/tomcat-html /var/lib/tomcat9/webapps/

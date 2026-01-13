@@ -64,3 +64,24 @@ Reiniciamos el servicio
 sudo systemctl restart tomcat9
 ```
 
+## 4. Despliegue de Aplicaciones
+
+* ### Despliegue de tomcat1.war (Manager App)
+
+Accedemos a http://192.168.56.8:8080/manager/html. Subimos el archivo tomcat1.war y verificamos su ejecución.
+
+<img src="/doc/img/despliegueOk.png" />
+
+* ### Despliegue de Web Estática (tomcat-html.zip)
+
+Además de aplicaciones Java complejas, Tomcat puede servir páginas web estáticas. Hemos descomprimido el archivo tomcat-html.zip y copiado la carpeta resultante al directorio de aplicaciones de Tomcat.
+
+```bash
+# Comando añadido al bootstrap.sh o ejecutado manualmente
+# Suponiendo que hemos descomprimido el zip en config/tomcat-html
+sudo cp -r /vagrant/config/tomcat-html /var/lib/tomcat9/webapps/
+```
+
+Podemos verificar que funciona accediendo a http://192.168.56.8:8080/tomcat-html.
+
+<img src="/doc/img/webEstatica.png" />
