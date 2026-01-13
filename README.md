@@ -41,4 +41,26 @@ Tras ejecutar `vagrant up`, comprobamos que el servicio está activo:
 
 <img src="/doc/img/tomcatStatus.png" />
 
+## 3. Configuración de Servidor
+
+* ### Gestión de Usuarios (tomcat-users.xml)
+
+Para poder usar la aplicación web "Manager", necesitamos definir un usuario con los roles `manager-gui` y `admin-gui`. Usamos el archivo proporcionado:
+```bash
+sudocp /vagrant/config/tomcat-users.xml /etc/tomcat9/tomcat-users.xml
+
+```
+
+* ### Acceso Externo (context.xml)
+
+En Debian, las aplicaciones de administración están en /usr/share/
+```bash
+sudo cp /vagrant/config/context.xml /usr/share/tomcat9-admin/manager/META-INF/context.xml
+sudo cp /vagrant/config/context.xml /usr/share/tomcat9-admin/host-manager/META-INF/context.xml
+```
+
+Reiniciamos el servicio
+```bash
+sudo systemctl restart tomcat9
+```
 
