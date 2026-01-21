@@ -85,3 +85,44 @@ sudo cp -r /vagrant/config/tomcat-html /var/lib/tomcat9/webapps/
 Podemos verificar que funciona accediendo a http://192.168.56.8:8080/tomcat-html.
 
 <img src="/doc/img/webEstatica.png" />
+
+## 5. Despliegue de "Rock Paper Scissors"
+
+Siguiendo las instrucciones encontradas en la web estática desplegada anteriormente ("Tarea"), procedemos a desplegar una segunda aplicación real obtenida de GitHub.
+
+* ### Clonado y preparación
+
+Clonamos el repositorio y cambiamos a la rama patch-1 tal como se indica:
+
+```bash
+git clone https://github.com/cameronmcnz/rock-paper-scissors.git
+cd rock-paper-scissors
+git checkout patch-1
+```
+
+* ### Configuración del pom.xml
+
+Editamos el pom.xml de la aplicación descargada para añadir el plugin de despliegue tomcat7-maven-plugin, configurando las credenciales de nuestro servidor y la ruta de despliegue /juego.
+
+```xml
+<plugins>
+ <plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2</version>
+    <configuration>
+    <url>http://192.168.56.8:8080/manager/text</url>
+    <server>TomcatServer</server>
+    <path>/juego</path>
+    <username>deploy</username>
+    <password>1234</password>
+    </configuration>
+ </plugin>
+</plugins>
+```
+
+* ### Despliegue y Verificación
+
+Ejecutamos mvn tomcat7:deploy desde la carpeta del proyecto. Tras el mensaje de éxito, accedemos a http://192.168.56.8:8080/juego.
+
+<img src="/doc/img/juego.png"/>
